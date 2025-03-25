@@ -3,7 +3,7 @@
 ### NeXTCS
 ### Period: 9 
 ## Name0: Miranda Chen
-## Name1: Ethan
+## Name1: Ethan Ma
 ---
 
 This project will be completed in phases. The first phase will be to work on this document. Use github-flavoured markdown. (For more markdown help [click here](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) or [here](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) )
@@ -54,14 +54,14 @@ PVector F = K [mag(q1)*mag(q2)/r^2]*(q1.x-q2.x, q1.y-q2.y).normalize()
 
 ### Simulation 1: Gravity
 Describe how you will attempt to simulate orbital motion.
-Centripetal acceleration?? (bc fixed orb)
-Idea 1: Forces for each non-fixed orb will be calculated by using the current orb and the fixed orb
+Centripetal acceleration?? (bc fixed orb)\
+Idea 1: Forces for each non-fixed orb will be calculated by using the current orb and the fixed orb\
 Idea 2: Forces calculated from current orb to orb.next so all orbs go in a circle + a force to the fixed orb so it doesn't fly away from the fixed orb
 
 --- 
 
 ### Simulation 2: Spring
-Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
+Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.  
 
 Lab w/o gravity
 
@@ -77,7 +77,7 @@ Screen divides into the half with drag and the half without. All orbs line up ve
 ### Simulation 4: Electrostatic force
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Startup: Each orb will be added a new instance variable with randomly generated charge
+Startup: Each orb will be added a new instance variable with randomly generated charge\
 The force between each orb is calculated. (opposites attract, likes repel) -> need to check whether orbs are attracting or repelling
 
 --- 
@@ -85,7 +85,7 @@ The force between each orb is calculated. (opposites attract, likes repel) -> ne
 ### Simulation 5: Gravity + spring + charge
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Spring: all orbs will have springs attached to one another (spring force applied)
-Gravity: field gravity or gravity between orbs? (I think gravity between orbs)
+Spring: all orbs will have springs attached to one another (spring force applied)\
+Gravity: field gravity or gravity between orbs? (I think gravity between orbs)\
 Charge: Charged orbs will line up at the border (fixed), orbs will spawn in the middle (not fixed) so that when it gets close to the border it will either attract to one of the orbs at the border or be repelled.
 
