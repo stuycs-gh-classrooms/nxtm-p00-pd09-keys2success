@@ -1,0 +1,63 @@
+class OrbNode extends Orb
+{
+    //attributes aka instance variables
+    OrbNode next;
+    OrbNode previous;
+    float x;
+    
+    OrbNode() {
+      super();
+    }
+    
+    void display(int springLength) {
+       super.display();
+       
+       if (next != null) {
+         x = PVector.dist(this.center,next.center);
+         if (x < springLength) { //set colors
+           stroke(0,255,0);
+         } else if (x > springLength) {
+           stroke(255,0,0);
+         } else {
+           stroke(0);
+         }
+         line(this.center.x,this.center.y+2,next.center.x,next.center.y+2); // +2 for adjusting endpoints
+       }
+       if (previous != null) {
+         x = PVector.dist(previous.center,this.center);
+         if (x < springLength) {
+           stroke(0,255,0);
+         } else if (x > springLength) {
+           stroke(255,0,0);
+         } else {
+           stroke(0);
+         }
+         line(previous.center.x+5,previous.center.y,this.center.x+5,this.center.y);
+       }
+    }
+    
+    void applySprings(int springLength, float springK) {
+      PVector f = new PVector();
+      if (next != null) {
+        f = this.getSpring(next,springLength,springK);
+        this.applyForce(f);
+      }
+      if (previous != null) {
+        f = this.getSpring(previous,springLength,springK);
+        this.applyForce(f);
+      }
+    }
+    
+    //void applyGravity(float G) {
+    //  PVector f = new PVector();
+    //  if (next != null) {
+    //    f = this.getGravity(next,G);
+    //    this.applyForce(f);
+    //  }
+    //  if (previous != null) {
+    //    f = this.getGravity(previous,G);
+    //    this.applyForce(f);
+    //  }
+    //}
+
+}//OrbNode
