@@ -30,7 +30,7 @@ All projects will require the following:
 ### Forumla
 What is the formula for your force? Including descriptions/definitions for the symbols. (You may include a picture of the formula if it is not easily typed.)
 
-PVector F = K [(mag(q1) * mag(q2)) / r^2 ]*(q1.x-q2.x, q1.y-q2.y).normalize()            
+PVector F = K * [(mag(q1) * mag(q2)) / r^2 ]*(q1.x-q2.x, q1.y-q2.y).normalize()            
 
 ### Custom Force
 - What information that is already present in the `Orb` or `OrbNode` classes does this force use?
