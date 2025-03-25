@@ -70,7 +70,7 @@ Lab w/o gravity
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-Screen divides into the half with drag and the half without. All orbs line up vertically at the left (side without drag) then are all assigned a random velocity to the x direction heading to the drag area. It should show that the drag is slowing down the orbs.
+Screen divides into the half with drag and the half without. All orbs line up vertically at the left (side without drag) then are all assigned a random velocity to the x direction heading to the drag area. It should show that the drag is slowing down the orbs
 
 --- 
 
@@ -82,10 +82,10 @@ The force between each orb is calculated. (opposites attract, likes repel) -> ne
 
 --- 
 
-### Simulation 5: Gravity + spring + charge
+### Simulation 5: Gravity + Spring + Charge
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
 Spring: all orbs will have springs attached to one another (spring force applied)\
 Gravity: field gravity or gravity between orbs? (I think gravity between orbs)\
-Charge: Charged orbs will line up at the border (fixed), orbs will spawn in the middle (not fixed) so that when it gets close to the border it will either attract to one of the orbs at the border or be repelled.
+Charge: Charged orbs will line up at the border (fixed), orbs will spawn in the middle (not fixed) so that when it gets close to the border it will either attract to one of the orbs at the border or be repelled
 
