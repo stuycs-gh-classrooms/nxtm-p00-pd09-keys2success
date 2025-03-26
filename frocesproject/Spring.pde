@@ -1,4 +1,5 @@
 //creates a spring simulation by setting a springNode
+//need to allow adding of orbs
 
 class Spring {
   int SPRING_LENGTH;
