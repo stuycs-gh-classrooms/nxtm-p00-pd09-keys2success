@@ -9,7 +9,7 @@ class Spring {
   Spring(int l, float k) {
     this.SPRING_LENGTH = l;
     this.SPRING_K = k;
-    earth = new FixedOrb(width/2, height * 200, 1, 20000);
+    earth = new FixedOrb(width/2, height * 200, 1, 20000,20);
 
     OrbNode o0 = new OrbNode();
     OrbNode o1 = new OrbNode();
@@ -26,14 +26,6 @@ class Spring {
 
   void boing() {
     OrbNode orb = o;
-    while (orb != null) {
-      orb.setColor();
-      orb.display(SPRING_LENGTH);
-      orb = orb.next;
-    }
-
-    orb = o;
-
     while (orb != null) {
       orb.applySprings(SPRING_LENGTH, SPRING_K);
       orb = orb.next;
@@ -59,5 +51,14 @@ class Spring {
     }
 
     earth.display();
+  }
+  
+  void display() {
+    OrbNode orb = o;
+    while (orb != null) {
+      orb.setColor();
+      orb.display(SPRING_LENGTH);
+      orb = orb.next;
+    }
   }
 }
