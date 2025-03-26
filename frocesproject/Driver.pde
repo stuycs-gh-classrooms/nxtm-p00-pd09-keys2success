@@ -18,13 +18,14 @@ String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
 
 FixedOrb earth;
 OrbNode o;
+Spring s;
 
 
 void setup()
 {
   size(600, 600);
 
-  earth = new FixedOrb(width/2, height * 200, 1, 20000);
+  earth = new FixedOrb(width/2, height * 200, 1, 20000,20);
 
   //for (int i = 0; i < numOrbs; i++) { //loop to initiate OrbNode and set previous and next OrbNode
   //  o[i] = new OrbNode();
@@ -36,17 +37,17 @@ void setup()
   //  }
   //}
 
-  OrbNode o0 = new OrbNode();
-  OrbNode o1 = new OrbNode();
-  OrbNode o2 = new OrbNode();
+  //OrbNode o0 = new OrbNode();
+  //OrbNode o1 = new OrbNode();
+  //OrbNode o2 = new OrbNode();
 
 
-  o0.next = o1;
-  o1.previous = o0;
-  o1.next = o2;
-  o2.previous = o1;
+  //o0.next = o1;
+  //o1.previous = o0;
+  //o1.next = o2;
+  //o2.previous = o1;
 
-  o = o0;
+  //o = o0;
 }//setup
 
 
@@ -54,42 +55,46 @@ void draw()
 {
   background(255);
   displayMode();
-
-  OrbNode orb = o;
-
-  while (orb != null) {
-    orb.setColor();
-    orb.display(SPRING_LENGTH);
-    orb = orb.next;
+  if (s != null) {
+    s.display();
+    s.boing();
   }
 
-  orb = o;
+  //OrbNode orb = o;
 
-  while (orb != null) {
-    orb.applySprings(SPRING_LENGTH, SPRING_K);
-    orb = orb.next;
-  }
+  //while (orb != null) {
+  //  orb.setColor();
+  //  orb.display(SPRING_LENGTH);
+  //  orb = orb.next;
+  //}
 
-  orb = o;
-  PVector gravity = orb.getGravity(earth,G_CONSTANT);
+  //orb = o;
 
-  if (toggles[GRAVITY]) {
-    while (orb != null) {
-      orb.applyForce(gravity);
-      orb = orb.next;
-    }
-  }
+  //while (orb != null) {
+  //  orb.applySprings(SPRING_LENGTH, SPRING_K);
+  //  orb = orb.next;
+  //}
 
-  orb = o;
+  //orb = o;
+  //PVector gravity = orb.getGravity(earth,G_CONSTANT);
 
-  if (toggles[MOVING]) { //allows pausing
-    while (orb != null) {
-      orb.move(toggles[BOUNCE]);
-      orb = orb.next;
-    }
-  }
+  //if (toggles[GRAVITY]) {
+  //  while (orb != null) {
+  //    orb.applyForce(gravity);
+  //    orb = orb.next;
+  //  }
+  //}
 
-  earth.display();
+  //orb = o;
+
+  //if (toggles[MOVING]) { //allows pausing
+  //  while (orb != null) {
+  //    orb.move(toggles[BOUNCE]);
+  //    orb = orb.next;
+  //  }
+  //}
+
+  //earth.display();
 
   //for (int i = 0; i < numOrbs; i++) {
   //  o[i].display();
@@ -134,7 +139,8 @@ void keyPressed()
   if (key == '1') {
     //new Gravity class
   } else if (key == '2') {
-    //new Spring class
+    s = new Spring(10,0.05);
+    //s.display();
   } else if (key == '3') {
     //new Drag class
   } else if (key == '4') {
