@@ -1,9 +1,9 @@
 class FixedOrb extends Orb
 {
     
-    FixedOrb(float x, float y, float s, float m)
+    FixedOrb(float x, float y, float s, float m, int q)
     {
-  super(x, y, s, m);
+  super(x, y, s, m, q);
   c = color(255, 0, 0);
     }
     
