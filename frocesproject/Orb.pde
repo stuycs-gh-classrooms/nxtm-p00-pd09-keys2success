@@ -83,8 +83,12 @@ class Orb
   }
 
   PVector getElectric(Orb other, float E) {
-    PVector force = new PVector();
+    PVector force = new PVector(center.x-other.center.x, center.y-other.center.y).normalize();
     float magnitude = E * abs(charge) * abs(other.charge);
+    float dist = dist(center.x, other.center.x, center.y, other.center.y);
+    magnitude = magnitude/(dist*dist);
+    force.mult(magnitude);
+    return force;
   }
 
   //spring force between calling orb and other
