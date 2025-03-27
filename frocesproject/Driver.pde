@@ -1,4 +1,4 @@
-int NUM_ORBS = 10;
+int NUM_ORBS = 3;
 int MIN_SIZE = 10;
 int MAX_SIZE = 60;
 float MIN_MASS = 10;
@@ -13,41 +13,30 @@ int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
+
+int GRAV = 0;
+int SPRING = 1;
+int ELECTRIC = 2;
+int COMBO = 3;
+
 boolean[] toggles = new boolean[4];
+boolean[] sim = new boolean[4];
+
 String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
+String[] simDisplay = {"Orbit", "Spring", "Electric", "Combination"};
 
 FixedOrb earth;
 OrbNode o;
+
 Spring s;
+Gravity g;
 
 
 void setup()
 {
   size(600, 600);
 
-  earth = new FixedOrb(width/2, height * 200, 1, 20000,20);
-
-  //for (int i = 0; i < numOrbs; i++) { //loop to initiate OrbNode and set previous and next OrbNode
-  //  o[i] = new OrbNode();
-  //  if (i != 0) {
-  //    o[i].previous = o[i-1];
-  //  }
-  //  if (i != numOrbs - 1) {
-  //    o[i].next = o[i+1];
-  //  }
-  //}
-
-  //OrbNode o0 = new OrbNode();
-  //OrbNode o1 = new OrbNode();
-  //OrbNode o2 = new OrbNode();
-
-
-  //o0.next = o1;
-  //o1.previous = o0;
-  //o1.next = o2;
-  //o2.previous = o1;
-
-  //o = o0;
+  earth = new FixedOrb(width/2, height * 200, 1, 20000, 20);
 }//setup
 
 
@@ -55,58 +44,12 @@ void draw()
 {
   background(255);
   displayMode();
+
   if (s != null) {
-    s.display();
-    s.boing();
+    s.boing(G_CONSTANT);
+  } else if (g != null) {
+    g.orbit();
   }
-
-  //OrbNode orb = o;
-
-  //while (orb != null) {
-  //  orb.setColor();
-  //  orb.display(SPRING_LENGTH);
-  //  orb = orb.next;
-  //}
-
-  //orb = o;
-
-  //while (orb != null) {
-  //  orb.applySprings(SPRING_LENGTH, SPRING_K);
-  //  orb = orb.next;
-  //}
-
-  //orb = o;
-  //PVector gravity = orb.getGravity(earth,G_CONSTANT);
-
-  //if (toggles[GRAVITY]) {
-  //  while (orb != null) {
-  //    orb.applyForce(gravity);
-  //    orb = orb.next;
-  //  }
-  //}
-
-  //orb = o;
-
-  //if (toggles[MOVING]) { //allows pausing
-  //  while (orb != null) {
-  //    orb.move(toggles[BOUNCE]);
-  //    orb = orb.next;
-  //  }
-  //}
-
-  //earth.display();
-
-  //for (int i = 0; i < numOrbs; i++) {
-  //  o[i].display();
-  //}
-
-  //PVector sf = o0.getSpring(o0.next, SPRING_LENGTH, SPRING_K);
-  //o0.applyForce(sf);
-  //sf = o1.getSpring(o1.previous, SPRING_LENGTH, SPRING_K);
-  //o1.applyForce(sf);
-
-  //o0.move(toggles[BOUNCE]);
-  //o1.move(toggles[BOUNCE]);
 }//draw
 
 
@@ -126,20 +69,27 @@ void keyPressed()
   if (key == 'd') {
     toggles[DRAGF] = !toggles[DRAGF];
   }
-  if (key == '=') {
-    OrbNode n = new OrbNode(); //create new node
-    n.next = o; //the head gets moved one space to make space for new node
-    o.previous = n; //the empty position will be taken by the new node
-    o = n; //update to a new head
+  if (key == '=' || key =='+') {
+    if (sim[SPRING]) {
+      s.addS();
+    } else if (sim[GRAV]) {
+      g.addS();
+    }
   }
   if (key == '-') {
-    o = o.next; //move everything to the next space so that the empty space would be set to null
-    o.previous = null;
+    if (sim[SPRING]) {
+    s.removeS();
+    } else if (sim[GRAV]) {
+      g.removeS();
+    }
   }
   if (key == '1') {
     //new Gravity class
+    sim[GRAV] = !sim[GRAV];
+    g = new Gravity(G_CONSTANT);
   } else if (key == '2') {
-    s = new Spring(10,0.05);
+    sim[SPRING] = !sim[SPRING];
+    s = new Spring(SPRING_LENGTH, SPRING_K);
     //s.display();
   } else if (key == '3') {
     //new Drag class
