@@ -1,6 +1,7 @@
 class OrbList {
 
   OrbNode front;
+  OrbNode addition;
 
   /*===========================
    Contructor
@@ -17,8 +18,11 @@ class OrbList {
    Insert o to the beginning of the list.
    =========================*/
   void addFront(OrbNode o) {
-    o.next = front;
-    front = o;
+    o.next = front; //make space for new orbnode
+    if (front != null) { //avoid nullpointerexception errors
+      front.previous = o;
+    }
+    front = o; //since o is added to the beginning it will be the new front
   }//addFront
 
 
@@ -33,18 +37,17 @@ class OrbList {
    SPRING_LEGNTH apart horizontally.
    =========================*/
   void populate(int n, boolean ordered) {
-    OrbNode o = front;
-    while (o != null) {
-      front = o.next;
-      o = o.next;
-    } //clears the linkedlist
+    front = null;
 
-    for (int i = 0; i < n; i++) {
+    int count = 0;
+    while (count < n) { //populate n amount of orbs
       if (ordered) {
-        addFront(new OrbNode(float(SPRING_LENGTH * i), float(height/2), random(10, MAX_SIZE), random(10, 100), 0));
+        addition = new OrbNode((float)count*SPRING_LENGTH, (float)height/2, random(10, 60), random(2, 100), 10); //generated orbs will be SPRING_LENGTTH apart, 10 is a placeholder for now
       } else {
-        addFront(new OrbNode());
+        addition = new OrbNode(random(10, width), random(10, height), random(10, 60), random(2, 100), 10); //random coords
       }
+      addFront(addition);
+      count++;
     }
   }//populate
 
@@ -112,32 +115,17 @@ class OrbList {
    should now be the first (and so on).
    =========================*/
   void removeFront() {
+    //OrbNode o = front;
+    //front = o.next;
     OrbNode o = front;
-    front = o.next;
+    front = front.next;
+    if (front != null) {
+      front.previous = null;
+    }
+    o.next = null;
+    o.previous = null;
     //o = null;
   }//removeFront
-
-
-  /*===========================
-   getSelected(float x, float y)
-   
-   If there is a node at (x, y), return
-   a reference to that node.
-   Otherwise, return null.
-   
-   See isSlected(float x, float y) in
-   the Orb class (line 115).
-   =========================*/
-  OrbNode getSelected(int x, int y) {
-    OrbNode o = front;
-    while (o != null) {
-      if (o.isSelected(x, y)) {
-        return o;
-      }
-      o = o.next;
-    }
-    return null;
-  }//getSelected
 
   /*===========================
    removeNode(OrbNode o)
@@ -156,4 +144,33 @@ class OrbList {
       d = d.next;
     }
   }
+
+  void showSprings(int l) {
+    OrbNode s = front;
+
+    while (s != null) {
+
+      if (s.next != null) {
+        springColor(PVector.dist(s.center, s.next.center), l);
+        line(s.center.x, s.center.y, s.next.center.x, s.next.center.y);
+      }
+      if (s.previous != null) {
+        springColor(PVector.dist(s.center, s.previous.center), l);
+        line(s.center.x, s.center.y+5, s.previous.center.x, s.previous.center.y+5);
+      }
+      s = s.next;
+    }
+  }
+
+  void springColor(float dist, int l) {
+    if (dist < l) {
+      stroke(0, 255, 0);
+    } else if (dist > l) {
+      stroke(255, 0, 0);
+    } else {
+      stroke(0);
+    }
+  }
+
+  
 }//OrbList
