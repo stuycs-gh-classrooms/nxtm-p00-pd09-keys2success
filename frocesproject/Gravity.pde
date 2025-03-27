@@ -1,4 +1,5 @@
 //simulation 1
+//spawn orbs in a certain place
 
 class Gravity {
   FixedOrb sun;
@@ -23,6 +24,7 @@ class Gravity {
       //planets move randomly
       planets.run(toggles[BOUNCE]);
       if (toggles[GRAVITY]) {
+        
         //if gravity on, orbital motion
       }
         
