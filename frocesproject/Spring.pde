@@ -1,65 +1,41 @@
 //creates a spring simulation by setting a springNode
-//need to allow adding of orbs
 
 class Spring {
   int SPRING_LENGTH;
-  float  SPRING_K;
+  float SPRING_K;
   FixedOrb earth;
-  OrbNode o;
+  OrbList o = new OrbList();
 
   Spring(int l, float k) {
     this.SPRING_LENGTH = l;
     this.SPRING_K = k;
     earth = new FixedOrb(width/2, height * 200, 1, 20000,20);
-
-    OrbNode o0 = new OrbNode();
-    OrbNode o1 = new OrbNode();
-    OrbNode o2 = new OrbNode();
-
-
-    o0.next = o1;
-    o1.previous = o0;
-    o1.next = o2;
-    o2.previous = o1;
-
-    o = o0;
+    
+    o.populate(3,false);
   }
 
-  void boing() {
-    OrbNode orb = o;
-    while (orb != null) {
-      orb.applySprings(SPRING_LENGTH, SPRING_K);
-      orb = orb.next;
-    }
-
-    orb = o;
-    PVector gravity = orb.getGravity(earth, G_CONSTANT);
-
+  void boing(float g) {
+    o.display();
+    o.showSprings(SPRING_LENGTH);
+    o.applySprings(SPRING_LENGTH, SPRING_K);
+    
     if (toggles[GRAVITY]) {
-      while (orb != null) {
-        orb.applyForce(gravity);
-        orb = orb.next;
-      }
+      o.applyGravity(earth, g);
     }
 
-    orb = o;
-
-    if (toggles[MOVING]) { //allows pausing
-      while (orb != null) {
-        orb.move(toggles[BOUNCE]);
-        orb = orb.next;
-      }
+    // Only run physics if NOT paused
+    if (toggles[MOVING]) {
+      o.run(toggles[BOUNCE]);
     }
 
     earth.display();
   }
   
-  void display() {
-    OrbNode orb = o;
-    while (orb != null) {
-      orb.setColor();
-      orb.display(SPRING_LENGTH);
-      orb = orb.next;
-    }
+  void addS() {
+    o.addFront(new OrbNode());
+  }
+  
+  void removeS() {
+    o.removeFront();
   }
 }
