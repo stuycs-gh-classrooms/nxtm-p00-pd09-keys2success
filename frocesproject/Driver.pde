@@ -85,12 +85,12 @@ void keyPressed()
   }
   if (key == '1') {
     //new Gravity class
-    clearSim();
-    sim[GRAV] = true;
-    g = new Gravity(G_CONSTANT);
+    sim[GRAV] = !sim[GRAV];
+    s = null;
+    g = new Gravity();
   } else if (key == '2') {
-    clearSim();
-    sim[SPRING] = true;
+    sim[SPRING] = !sim[SPRING];
+    g = null;
     s = new Spring(SPRING_LENGTH, SPRING_K);
     //s.display();
   } else if (key == '3') {
@@ -101,13 +101,6 @@ void keyPressed()
     // new Combo class (will extend from Spring, Gravity, and Electric)
   }
 }
-
-void clearSim() {
-  for (int i = 0; i < sim.length; i++) {
-    sim[i] = false;
-  }
-}
-
 
 void displayMode()
 {
