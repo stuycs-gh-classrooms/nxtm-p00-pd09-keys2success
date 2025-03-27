@@ -6,11 +6,11 @@ class Gravity {
   OrbList planets;
   float grav;
 
-  Gravity(float g) {
+  Gravity() {
     sun = new FixedOrb(width/2, height/2, 50, 100, 0);
     planets = new OrbList();
-    this.grav = g;
-    planets.populate(3, false);
+    grav = 0.2; //weaker gravity for a more circular orbit
+    circlePopulate(3);
   }
 
   void orbit() {
@@ -24,10 +24,23 @@ class Gravity {
       //planets move randomly
       planets.run(toggles[BOUNCE]);
       if (toggles[GRAVITY]) {
-        
+        planets.applyGravity(sun, grav);
         //if gravity on, orbital motion
       }
-        
+    }
+  }
+
+  void circlePopulate(int n) {
+    OrbNode addition;
+    planets.front = null;
+
+    int count = 0;
+    while (count < n) { //populate n amount of orbs
+      addition = new OrbNode((float)160+(count*100), (float)(height-60), random(40,50), 100, 10);
+      print(addition.bsize);
+      addition.velocity.x = 4; //added velocity to "pull" planets into orbit
+      planets.addFront(addition);
+      count++;
     }
   }
 
