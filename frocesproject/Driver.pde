@@ -13,17 +13,17 @@ int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
+boolean[] toggles = new boolean[4];
 
 int GRAV = 0;
 int SPRING = 1;
-int ELECTRIC = 2;
-int COMBO = 3;
-
-boolean[] toggles = new boolean[4];
-boolean[] sim = new boolean[4];
+int DRAGS = 2;
+int ELECTRIC = 3;
+int COMBO = 4;
+boolean[] sim = new boolean[5];
 
 String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
-String[] simDisplay = {"Orbit", "Spring", "Electric", "Combination"};
+String[] simDisplay = {"Orbit", "Spring", "Drag", "Electric", "Combination"};
 
 FixedOrb earth;
 OrbNode o;
@@ -78,17 +78,19 @@ void keyPressed()
   }
   if (key == '-') {
     if (sim[SPRING]) {
-    s.removeS();
+      s.removeS();
     } else if (sim[GRAV]) {
       g.removeS();
     }
   }
   if (key == '1') {
     //new Gravity class
-    sim[GRAV] = !sim[GRAV];
+    clearSim();
+    sim[GRAV] = true;
     g = new Gravity(G_CONSTANT);
   } else if (key == '2') {
-    sim[SPRING] = !sim[SPRING];
+    clearSim();
+    sim[SPRING] = true;
     s = new Spring(SPRING_LENGTH, SPRING_K);
     //s.display();
   } else if (key == '3') {
@@ -97,6 +99,12 @@ void keyPressed()
     // new Electric class
   } else if (key == '5') {
     // new Combo class (will extend from Spring, Gravity, and Electric)
+  }
+}
+
+void clearSim() {
+  for (int i = 0; i < sim.length; i++) {
+    sim[i] = false;
   }
 }
 
