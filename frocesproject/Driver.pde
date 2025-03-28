@@ -9,6 +9,8 @@ float D_COEF = 0.1;
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
 
+float ELECTRICTY_C = 8.99*pow(10, -19);
+
 int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
@@ -30,6 +32,7 @@ OrbNode o;
 
 Spring s;
 Gravity g;
+Electric e;
 
 
 void setup()
@@ -49,6 +52,8 @@ void draw()
     s.boing(G_CONSTANT);
   } else if (g != null) {
     g.orbit();
+  } else if (e != null) {
+    e.electric();
   }
 }//draw
 
@@ -74,6 +79,8 @@ void keyPressed()
       s.addS();
     } else if (sim[GRAV]) {
       g.addS();
+    } else if (sim[ELECTRIC]) {
+      e.addS();
     }
   }
   if (key == '-') {
@@ -81,21 +88,29 @@ void keyPressed()
       s.removeS();
     } else if (sim[GRAV]) {
       g.removeS();
+    } else if (sim[ELECTRIC]) {
+      e.removeS();
     }
   }
   if (key == '1') {
     //new Gravity class
     sim[GRAV] = !sim[GRAV];
     s = null;
+    e = null;
     g = new Gravity();
   } else if (key == '2') {
     sim[SPRING] = !sim[SPRING];
     g = null;
+    e = null;
     s = new Spring(SPRING_LENGTH, SPRING_K);
     //s.display();
   } else if (key == '3') {
     //new Drag class
   } else if (key == '4') {
+    sim[ELECTRIC] = !sim[ELECTRIC];
+    s = null;
+    g = null;
+    e = new Electric(ELECTRICTY_C);
     // new Electric class
   } else if (key == '5') {
     // new Combo class (will extend from Spring, Gravity, and Electric)

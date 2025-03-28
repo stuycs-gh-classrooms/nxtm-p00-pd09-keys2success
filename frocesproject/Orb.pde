@@ -83,11 +83,13 @@ class Orb
   }
 
   PVector getElectric(Orb other, float E) {
-    PVector force = new PVector(center.x-other.center.x, center.y-other.center.y).normalize();
+    PVector force = new PVector();
+    PVector direction = PVector.sub(other.center, this.center);
+    direction.normalize();
     float magnitude = E * abs(charge) * abs(other.charge);
     float dist = dist(center.x, other.center.x, center.y, other.center.y);
     magnitude = magnitude/(dist*dist);
-    force.mult(magnitude);
+    force = direction.mult(magnitude);
     return force;
   }
 

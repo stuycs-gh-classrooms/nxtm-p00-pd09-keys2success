@@ -52,4 +52,16 @@ class OrbNode extends Orb
       this.applyForce(f);
     }
   }
+  
+  void applyElectric(float electricity_c) {
+    PVector f = new PVector();
+    if (next != null) {
+      f = this.getElectric(next, electricity_c);
+      this.applyForce(f);
+    }
+    if (previous != null) {
+      f = this.getElectric(previous, electricity_c);
+      this.applyForce(f);
+    }
+  }
 }//OrbNode

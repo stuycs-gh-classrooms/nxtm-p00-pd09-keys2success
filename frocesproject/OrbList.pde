@@ -3,20 +3,10 @@ class OrbList {
   OrbNode front;
   OrbNode addition;
 
-  /*===========================
-   Contructor
-   Does very little.
-   You do not need to modify this method.
-   =========================*/
   OrbList() {
     front = null;
   }//constructor
 
-  /*===========================
-   addFront(OrbNode o)
-   
-   Insert o to the beginning of the list.
-   =========================*/
   void addFront(OrbNode o) {
     o.next = front; //make space for new orbnode
     if (front != null) { //avoid nullpointerexception errors
@@ -25,17 +15,6 @@ class OrbList {
     front = o; //since o is added to the beginning it will be the new front
   }//addFront
 
-
-  /*===========================
-   populate(int n, boolean ordered)
-   
-   Clear the list.
-   Add n randomly generated  orbs to the list,
-   using addFront.
-   If ordered is true, the orbs should all
-   have the same y coordinate and be spaced
-   SPRING_LEGNTH apart horizontally.
-   =========================*/
   void populate(int n, boolean ordered) {
     front = null;
 
@@ -51,12 +30,6 @@ class OrbList {
     }
   }//populate
 
-  /*===========================
-   display(int springLength)
-   
-   Display all the nodes in the list using
-   the display method defined in the OrbNode class.
-   =========================*/
   void display() {
 
     OrbNode o = front;
@@ -66,12 +39,6 @@ class OrbList {
     }
   }//display
 
-  /*===========================
-   applySprings(int springLength, float springK)
-   
-   Use the applySprings method in OrbNode on each
-   element in the list.
-   =========================*/
   void applySprings(int springLength, float springK) {
     OrbNode o = front;
     while (o != null) {
@@ -80,12 +47,6 @@ class OrbList {
     }
   }//applySprings
 
-  /*===========================
-   applyGravity(Orb other, float gConstant)
-   
-   Use the getGravity and applyForce methods
-   to apply gravity crrectly.
-   =========================*/
   void applyGravity(Orb other, float gConstant) {
     OrbNode o = front;
     while (o != null) {
@@ -94,11 +55,14 @@ class OrbList {
     }
   }//applyGravity
 
-  /*===========================
-   run(boolean bounce)
-   
-   Call run on each node in the list.
-   =========================*/
+  void applyElectric(float eConstant) {
+    OrbNode o = front;
+    while (o != null) {
+      o.applyElectric(eConstant);
+      o = o.next;
+    }
+  }
+
   void run(boolean bounce) {
     OrbNode o = front;
     while (o != null) {
@@ -107,13 +71,6 @@ class OrbList {
     }
   }//applySprings
 
-  /*===========================
-   removeFront()
-   
-   Remove the element at the front of the list, i.e.
-   after this method is run, the former second element
-   should now be the first (and so on).
-   =========================*/
   void removeFront() {
     //OrbNode o = front;
     //front = o.next;
@@ -127,14 +84,6 @@ class OrbList {
     //o = null;
   }//removeFront
 
-  /*===========================
-   removeNode(OrbNode o)
-   
-   Removes o from the list. You can
-   assume o is an OrbNode in the list.
-   You cannot assume anything about the
-   position of o in the list.
-   =========================*/
   void removeNode(OrbNode o) {
     OrbNode d = front;
     while (d != null) {
