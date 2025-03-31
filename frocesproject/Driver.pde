@@ -9,13 +9,14 @@ float D_COEF = 0.1;
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
 
-float ELECTRICTY_C = 8.99*pow(10, -19);
+float E_CONSTANT = 10;
 
 int MOVING = 0;
 int BOUNCE = 1;
 int GRAVITY = 2;
 int DRAGF = 3;
-boolean[] toggles = new boolean[4];
+int TELECTRIC = 4;
+boolean[] toggles = new boolean[5];
 
 int GRAV = 0;
 int SPRING = 1;
@@ -24,7 +25,7 @@ int ELECTRIC = 3;
 int COMBO = 4;
 boolean[] sim = new boolean[5];
 
-String[] modes = {"Moving", "Bounce", "Gravity", "Drag"};
+String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "Electric"};
 String[] simDisplay = {"Orbit", "Spring", "Drag", "Electric", "Combination"};
 
 FixedOrb earth;
@@ -74,6 +75,9 @@ void keyPressed()
   if (key == 'd') {
     toggles[DRAGF] = !toggles[DRAGF];
   }
+  if (key == 'e') {
+    toggles[TELECTRIC] = !toggles[TELECTRIC];
+  }
   if (key == '=' || key =='+') {
     if (sim[SPRING]) {
       s.addS();
@@ -110,7 +114,7 @@ void keyPressed()
     sim[ELECTRIC] = !sim[ELECTRIC];
     s = null;
     g = null;
-    e = new Electric(ELECTRICTY_C);
+    e = new Electric(E_CONSTANT);
     // new Electric class
   } else if (key == '5') {
     // new Combo class (will extend from Spring, Gravity, and Electric)

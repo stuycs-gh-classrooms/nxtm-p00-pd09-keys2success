@@ -58,6 +58,10 @@ class Orb
     acceleration.add(scaleForce);
   }
 
+  void applyEForce(PVector force) {
+    PVector scaleForce = force.copy();
+    acceleration.add(scaleForce);
+  }
 
   PVector getDragForce(float cd)
   {
@@ -84,13 +88,16 @@ class Orb
 
   PVector getElectric(Orb other, float E) {
     PVector force = new PVector();
-    PVector direction = PVector.sub(other.center, this.center);
-    direction.normalize();
+    PVector direction = PVector.sub(other.center, this.center).normalize();
     float magnitude = E * abs(charge) * abs(other.charge);
     float dist = dist(center.x, other.center.x, center.y, other.center.y);
     magnitude = magnitude/(dist*dist);
     force = direction.mult(magnitude);
-    return force;
+    if (charge * other.charge >= 0) {
+      return force.mult(-1);
+    } else {
+      return force;
+    }
   }
 
   //spring force between calling orb and other

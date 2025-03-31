@@ -27,7 +27,7 @@ class Electric {
 
     int count = 0;
     while (count < n) { //populate n amount of orbs
-      addition = new OrbNode((float)160+(count*100), (float)(height-60), random(40, 50), 100, 10);
+      addition = new OrbNode((float)160+(count*100), (float)(height/2), random(40, 50), 100, int(random(-10, 10)));
       print(addition.bsize);
       charges.addFront(addition);
       count++;
