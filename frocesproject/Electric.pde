@@ -17,7 +17,9 @@ class Electric {
       //planets move randomly
       charges.run(toggles[BOUNCE]);
 
-      charges.applyElectric(electricity);
+      if (toggles[TELECTRIC]) {
+        charges.applyElectric(electricity);
+      }
     }
   }
 

@@ -9,7 +9,7 @@ float D_COEF = 0.1;
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
 
-float E_CONSTANT = 10;
+float E_CONSTANT = 20;
 
 int MOVING = 0;
 int BOUNCE = 1;
