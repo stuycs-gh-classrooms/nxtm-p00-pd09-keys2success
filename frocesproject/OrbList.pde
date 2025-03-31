@@ -57,9 +57,16 @@ class OrbList {
 
   void applyElectric(float eConstant) {
     OrbNode o = front;
+    o.setColor();
     while (o != null) {
       o.applyElectric(eConstant);
+      fill(255, 0, 0);
+      text(o.charge, o.center.x, o.center.y);
       o = o.next;
+    }
+    while (o != null) {
+      o.applyElectric(eConstant);
+      o = o.previous;
     }
   }
 

@@ -53,15 +53,14 @@ class OrbNode extends Orb
     }
   }
   
-  void applyElectric(float electricity_c) {
-    PVector f = new PVector();
+  void applyElectric(float eConstant) {
     if (next != null) {
-      f = this.getElectric(next, electricity_c);
-      this.applyForce(f);
+      PVector sforce = getElectric(next, eConstant);
+      applyEForce(sforce);
     }
     if (previous != null) {
-      f = this.getElectric(previous, electricity_c);
-      this.applyForce(f);
+      PVector sforce = getElectric(previous, eConstant);
+      applyEForce(sforce);
     }
-  }
+  }///applyElectric
 }//OrbNode
