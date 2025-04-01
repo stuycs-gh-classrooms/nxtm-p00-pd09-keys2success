@@ -34,6 +34,7 @@ OrbNode o;
 Spring s;
 Gravity g;
 Electric e;
+Combo c;
 
 
 void setup()
@@ -55,6 +56,8 @@ void draw()
     g.orbit();
   } else if (e != null) {
     e.electric();
+  } else if (c != null) {
+    c.startSim();
   }
 }//draw
 
@@ -101,11 +104,13 @@ void keyPressed()
     sim[GRAV] = !sim[GRAV];
     s = null;
     e = null;
+    c = null;
     g = new Gravity();
   } else if (key == '2') {
     sim[SPRING] = !sim[SPRING];
     g = null;
     e = null;
+    c = null;
     s = new Spring(SPRING_LENGTH, SPRING_K);
     //s.display();
   } else if (key == '3') {
@@ -114,10 +119,15 @@ void keyPressed()
     sim[ELECTRIC] = !sim[ELECTRIC];
     s = null;
     g = null;
+    c = null;
     e = new Electric(E_CONSTANT);
     // new Electric class
   } else if (key == '5') {
-    // new Combo class (will extend from Spring, Gravity, and Electric)
+    sim[COMBO] = !sim[COMBO];
+    s = null;
+    g = null;
+    e = null;
+    c = new Combo(SPRING_LENGTH,SPRING_K,G_CONSTANT,E_CONSTANT,10);
   }
 }
 
