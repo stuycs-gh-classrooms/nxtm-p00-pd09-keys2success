@@ -88,6 +88,8 @@ void keyPressed()
       g.addS();
     } else if (sim[ELECTRIC]) {
       e.addS();
+    } else if (sim[COMBO]) {
+      c.addS();
     }
   }
   if (key == '-') {
@@ -97,6 +99,8 @@ void keyPressed()
       g.removeS();
     } else if (sim[ELECTRIC]) {
       e.removeS();
+    } else if (sim[COMBO]) {
+      c.removeS();
     }
   }
   if (key == '1') {
@@ -127,7 +131,7 @@ void keyPressed()
     s = null;
     g = null;
     e = null;
-    c = new Combo(SPRING_LENGTH,SPRING_K,G_CONSTANT,E_CONSTANT,10);
+    c = new Combo(SPRING_LENGTH,SPRING_K,G_CONSTANT,E_CONSTANT,50);
   }
 }
 
