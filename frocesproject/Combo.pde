@@ -2,7 +2,7 @@
 
 class Combo {
   FixedOrb[][] borderOrbs; //orbs lining up at the border
-  OrbList main; //orbs moving at the center
+  OrbList main = new OrbList(); //orbs moving at the center
   FixedOrb earth;
   int l;
   float k_constant;
@@ -17,7 +17,7 @@ class Combo {
     this.gravity = grav;
     this.e_constant = e;
     this.bsize = size;
-    main.populate(3,false); //nullpointer???
+    main.populate(3,false);
     makeBorder();
   }
 
@@ -29,6 +29,7 @@ class Combo {
       for (int j = 0; j < numCols; j++) {
         if (i == 0 || i == numRows - 1 || j == 0 || j == numCols - 1) {
           borderOrbs[i][j] = new FixedOrb(i*bsize, j*bsize, bsize, random(10, 100), int(random(-20, 20))); //only line up the border
+          borderOrbs[i][j].display(); //why are the orbs not displaying?
         }
       }
     }
