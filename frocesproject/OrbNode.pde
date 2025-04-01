@@ -63,4 +63,9 @@ class OrbNode extends Orb
       applyEForce(sforce);
     }
   }///applyElectric
+  
+  void applyFixedElectric(Orb fixed, float eConstant) {
+    PVector sforce = getElectric(fixed, eConstant);
+    applyEForce(sforce);
+  }
 }//OrbNode

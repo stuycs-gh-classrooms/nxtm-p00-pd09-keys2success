@@ -70,6 +70,15 @@ class OrbList {
     }
   }
 
+  void applyFixedElectric(Orb fixed, float E) {
+    OrbNode o = front;
+    while (o != null) {
+      o.applyFixedElectric(fixed, E);
+      o = o.next;
+    }
+  }
+
+
   void run(boolean bounce) {
     OrbNode o = front;
     while (o != null) {
@@ -127,6 +136,4 @@ class OrbList {
       stroke(0);
     }
   }
-
-  
 }//OrbList
