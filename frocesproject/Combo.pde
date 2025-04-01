@@ -42,6 +42,9 @@ class Combo {
       for (int j = 0; j < numCols; j++) {
         if (borderOrbs[i][j] != null) { //out of bounds
           borderOrbs[i][j].display();
+          if (toggles[TELECTRIC]) {
+            borderOrbs[i][j].applyElectric(e_constant);
+          }
         }
       }
     }
