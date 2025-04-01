@@ -9,6 +9,8 @@ class Combo {
   float gravity;
   float e_constant;
   int bsize;
+  int numCols;
+  int numRows;
 
   Combo(int len, float k, float grav, float e, int size) {
     earth = new FixedOrb(width/2, height * 200, 1, 20000, 0);
@@ -17,19 +19,18 @@ class Combo {
     this.gravity = grav;
     this.e_constant = e;
     this.bsize = size;
-    main.populate(3,false);
+    main.populate(3, false);
+    numCols = (int) width/bsize;
+    numRows = (int) height/bsize;
     makeBorder();
   }
 
   void makeBorder() {
-    int numCols = (int) width/bsize;
-    int numRows = (int) height/bsize;
     borderOrbs = new FixedOrb[numCols][numRows];
     for (int i = 0; i < numRows; i++) {
       for (int j = 0; j < numCols; j++) {
         if (i == 0 || i == numRows - 1 || j == 0 || j == numCols - 1) {
-          borderOrbs[i][j] = new FixedOrb(i*bsize, j*bsize, bsize, random(10, 100), int(random(-20, 20))); //only line up the border
-          borderOrbs[i][j].display(); //why are the orbs not displaying?
+          borderOrbs[i][j] = new FixedOrb(i*bsize+(bsize/2), (bsize)+j*bsize, bsize, random(10, 100), int(random(-20, 20))); //only line up the border
         }
       }
     }
@@ -37,6 +38,14 @@ class Combo {
 
   void startSim() {
     main.display();
+    for (int i = 0; i < numRows; i++) { //display border
+      for (int j = 0; j < numCols; j++) {
+        if (borderOrbs[i][j] != null) { //out of bounds
+          borderOrbs[i][j].display();
+        }
+      }
+    }
+
     main.showSprings(l);
     main.applySprings(l, k_constant);
 
@@ -53,11 +62,11 @@ class Combo {
       }
     }
   }
-  
+
   void addS() {
     main.addFront(new OrbNode());
   }
-  
+
   void removeS() {
     main.removeFront();
   }
