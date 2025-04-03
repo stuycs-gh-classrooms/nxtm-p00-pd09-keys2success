@@ -26,7 +26,7 @@ int COMBO = 4;
 boolean[] sim = new boolean[5];
 
 String[] modes = {"Moving", "Bounce", "Gravity", "Drag", "Electric"};
-String[] simDisplay = {"Orbit", "Spring", "Drag", "Electric", "Combination"};
+String[] simDisplay = {"Orbit", "Spring", "Drag", "Electric", "Combo"};
 
 FixedOrb earth;
 OrbNode o;
@@ -42,6 +42,8 @@ void setup()
   size(600, 600);
 
   earth = new FixedOrb(width/2, height * 200, 1, 20000, 20);
+  g = new Gravity();
+  sim[GRAV] = true;
 }//setup
 
 
@@ -105,13 +107,15 @@ void keyPressed()
   }
   if (key == '1') {
     //new Gravity class
-    sim[GRAV] = !sim[GRAV];
+    sim[SPRING] = sim[ELECTRIC] = sim[COMBO] = false;
+    sim[GRAV] = true;
     s = null;
     e = null;
     c = null;
     g = new Gravity();
   } else if (key == '2') {
-    sim[SPRING] = !sim[SPRING];
+    sim[ELECTRIC] = sim[GRAV] = sim[COMBO] = false;
+    sim[SPRING] = true;
     g = null;
     e = null;
     c = null;
@@ -120,14 +124,16 @@ void keyPressed()
   } else if (key == '3') {
     //new Drag class
   } else if (key == '4') {
-    sim[ELECTRIC] = !sim[ELECTRIC];
+    sim[GRAV] = sim[COMBO] = sim[SPRING] = false;
+    sim[ELECTRIC] = true;
     s = null;
     g = null;
     c = null;
     e = new Electric(E_CONSTANT);
     // new Electric class
   } else if (key == '5') {
-    sim[COMBO] = !sim[COMBO];
+    sim[GRAV] = sim[SPRING] = sim[ELECTRIC] = false;
+    sim[COMBO] = true;
     s = null;
     g = null;
     e = null;
@@ -156,5 +162,23 @@ void displayMode()
     fill(0);
     text(modes[m], x+2, 2);
     x+= w+5;
+  }
+  
+  //displaying simulation types
+  int c = 0;
+  boolean active = false;
+  for (int s = 0; s < sim.length; s++) {
+    if (sim[s] && !active) {
+      fill(0,255,0);
+      active = true;
+    } else {
+      fill(255,0,0);
+    }
+    
+    float t = textWidth(simDisplay[s]);
+    rect((width/2)+15+c,0,t+8,20);
+    fill(0,0,255);
+    text(simDisplay[s],(width/2)+c+21,2);
+    c += t+5;
   }
 }//display
