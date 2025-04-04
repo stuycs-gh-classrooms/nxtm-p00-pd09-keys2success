@@ -1,4 +1,5 @@
 //creates a spring simulation by setting a springNode
+//need to allow adding of orbs
 
 class Spring {
   int SPRING_LENGTH;
@@ -9,7 +10,7 @@ class Spring {
   Spring(int l, float k) {
     this.SPRING_LENGTH = l;
     this.SPRING_K = k;
-    earth = new FixedOrb(width/2, height * 200, 1, 20000,20);
+    earth = new FixedOrb(width/2, height * 200, 1, 20000,0);
     
     o.populate(3,false);
   }
