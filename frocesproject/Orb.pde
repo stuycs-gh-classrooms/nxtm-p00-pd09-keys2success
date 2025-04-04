@@ -21,7 +21,7 @@ class Orb
     velocity = new PVector();
     acceleration = new PVector();
     setColor();
-    charge = int(random(-10, 11));
+    charge = int(random(-5, 6));
   }
 
 
