@@ -21,9 +21,9 @@ class OrbList {
     int count = 0;
     while (count < n) { //populate n amount of orbs
       if (ordered) {
-        addition = new OrbNode((float)count*SPRING_LENGTH, (float)height/2, random(10, 60), random(2, 100), 10); //generated orbs will be SPRING_LENGTTH apart, 10 is a placeholder for now
+        addition = new OrbNode((float)count*SPRING_LENGTH, (float)height/2, random(10, 60), random(2, 100), int(random(-5,6))); //generated orbs will be SPRING_LENGTTH apart, 10 is a placeholder for now
       } else {
-        addition = new OrbNode(random(10, width), random(10, height), random(10, 60), random(2, 100), 10); //random coords
+        addition = new OrbNode(random(10, width), random(10, height), random(10, 60), random(2, 100), int(random(-5,6))); //random coords
       }
       addFront(addition);
       count++;
@@ -69,15 +69,6 @@ class OrbList {
       o = o.previous;
     }
   }
-
-  void applyFixedElectric(Orb fixed, float E) {
-    OrbNode o = front;
-    while (o != null) {
-      o.applyFixedElectric(fixed, E);
-      o = o.next;
-    }
-  }
-
 
   void run(boolean bounce) {
     OrbNode o = front;
@@ -136,4 +127,6 @@ class OrbList {
       stroke(0);
     }
   }
+
+  
 }//OrbList
