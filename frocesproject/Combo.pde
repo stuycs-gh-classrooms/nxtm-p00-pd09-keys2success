@@ -31,9 +31,9 @@ class Combo {
       for (int j = 0; j < numCols; j++) {
         if (i == 0 || i == numRows - 1 || j == 0 || j == numCols - 1) {
           if (i == 0 || i == numRows - 1) {
-            borderOrbs[i][j] = new FixedOrb(i*bsize+(bsize/2), (bsize)+j*bsize, bsize, random(10, 100), 5); //only line up the border
+            borderOrbs[i][j] = new FixedOrb(i*bsize+(bsize/2), (bsize)+j*bsize, bsize, random(10, 100), 10); //only line up the border
           } else if (j == 0 || j == numCols - 1) {
-            borderOrbs[i][j] = new FixedOrb(i*bsize+(bsize/2), (bsize)+j*bsize, bsize, random(10, 100), -5);
+            borderOrbs[i][j] = new FixedOrb(i*bsize+(bsize/2), (bsize)+j*bsize, bsize, random(10, 100), -10);
           }
         }
       }
@@ -65,14 +65,14 @@ class Combo {
         OrbNode current = main.front;
         while (current != null) { //main orbs
           fill(255, 0, 0);
-          text(current.charge, current.center.x, current.center.y);
+          text(int(current.charge), current.center.x, current.center.y);
           //checking each borderOrb
           for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
               fill(0);
               textAlign(CENTER);
               if (borderOrbs[i][j] != null) {
-                text(borderOrbs[i][j].charge, borderOrbs[i][j].center.x, borderOrbs[i][j].center.y); //show charge
+                text(int(borderOrbs[i][j].charge), borderOrbs[i][j].center.x, borderOrbs[i][j].center.y); //show charge
               }
               FixedOrb borderOrb = borderOrbs[i][j];
               if (borderOrb != null) { //applying the forces
