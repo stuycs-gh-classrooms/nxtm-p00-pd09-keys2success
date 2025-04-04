@@ -7,7 +7,7 @@ class Gravity {
   float grav;
 
   Gravity() {
-    sun = new FixedOrb(width/2, height/2, 50, 100, 0);
+    sun = new FixedOrb(width/2, height/2, 50, 120, 0);
     planets = new OrbList();
     grav = 0.2;
     circlePopulate(3);
@@ -36,7 +36,7 @@ class Gravity {
 
     int count = 0;
     while (count < n) { //populate n amount of orbs
-      addition = new OrbNode((float)160+(count*100), (float)(height-60), random(40,50), 100, 10);
+      addition = new OrbNode((float)160+(count*100), (float)(height-60), random(40,50), 100, 0);
       print(addition.bsize);
       addition.velocity.x = 4; //aded velocity to "pull" planets into orbit
       planets.addFront(addition);
@@ -45,7 +45,7 @@ class Gravity {
   }
 
   void addS() {
-    OrbNode n = new OrbNode((float)260, (float)(height-60), random(40,50), 100, 10);
+    OrbNode n = new OrbNode((float)260, (float)(height-60), random(40,50), 100, 0);
     n.velocity.x = 4;
     planets.addFront(n);
   }
