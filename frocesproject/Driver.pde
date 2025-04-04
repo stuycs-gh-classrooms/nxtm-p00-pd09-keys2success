@@ -4,7 +4,8 @@ int MAX_SIZE = 60;
 float MIN_MASS = 10;
 float MAX_MASS = 100;
 float G_CONSTANT = 1;
-float D_COEF = 0.1;
+float D_COEF = 1;
+PVector UNIVERSAL_GRAV = new PVector(0, 4.9);
 
 int SPRING_LENGTH = 50;
 float  SPRING_K = 0.005;
@@ -33,6 +34,7 @@ OrbNode o;
 
 Spring s;
 Gravity g;
+Drag d;
 Electric e;
 Combo c;
 
@@ -56,6 +58,8 @@ void draw()
     s.boing(G_CONSTANT);
   } else if (g != null) {
     g.orbit();
+  } else if (d != null) {
+    d.drag();    
   } else if (e != null) {
     e.electric();
   } else if (c != null) {
@@ -107,37 +111,48 @@ void keyPressed()
   }
   if (key == '1') {
     //new Gravity class
-    sim[SPRING] = sim[ELECTRIC] = sim[COMBO] = false;
+    sim[SPRING] = sim[ELECTRIC] = sim[COMBO] = sim[DRAGS] = false;
     sim[GRAV] = true;
     s = null;
     e = null;
+    d = null;
     c = null;
     g = new Gravity();
   } else if (key == '2') {
-    sim[ELECTRIC] = sim[GRAV] = sim[COMBO] = false;
+    sim[ELECTRIC] = sim[GRAV] = sim[COMBO] = sim[DRAGS] = false;
     sim[SPRING] = true;
     g = null;
     e = null;
+    d = null;
     c = null;
     s = new Spring(SPRING_LENGTH, SPRING_K);
     //s.display();
   } else if (key == '3') {
+    sim[ELECTRIC] = sim[GRAV] = sim[COMBO] = sim[SPRING] = false;
+    sim[DRAGS] = true;
+    s = null;
+    g = null;
+    d = new Drag(D_COEF, UNIVERSAL_GRAV);
+    c = null;
+    e = null;
     //new Drag class
   } else if (key == '4') {
-    sim[GRAV] = sim[COMBO] = sim[SPRING] = false;
+    sim[GRAV] = sim[COMBO] = sim[SPRING] = sim[DRAGS] = false;
     sim[ELECTRIC] = true;
     s = null;
     g = null;
+    d = null;
     c = null;
     e = new Electric(E_CONSTANT);
     // new Electric class
   } else if (key == '5') {
-    sim[GRAV] = sim[SPRING] = sim[ELECTRIC] = false;
+    sim[GRAV] = sim[SPRING] = sim[ELECTRIC] = sim[DRAGS] = false;
     sim[COMBO] = true;
     s = null;
     g = null;
+    d = null;
     e = null;
-    c = new Combo(SPRING_LENGTH,SPRING_K,G_CONSTANT,E_CONSTANT,50);
+    c = new Combo(SPRING_LENGTH, SPRING_K, G_CONSTANT, E_CONSTANT, 50);
   }
 }
 
@@ -163,22 +178,22 @@ void displayMode()
     text(modes[m], x+2, 2);
     x+= w+5;
   }
-  
+
   //displaying simulation types
   int c = 0;
   boolean active = false;
   for (int s = 0; s < sim.length; s++) {
     if (sim[s] && !active) {
-      fill(0,255,0);
+      fill(0, 255, 0);
       active = true;
     } else {
-      fill(255,0,0);
+      fill(255, 0, 0);
     }
-    
+
     float t = textWidth(simDisplay[s]);
-    rect((width/2)+15+c,0,t+8,20);
-    fill(0,0,255);
-    text(simDisplay[s],(width/2)+c+21,2);
+    rect((width/2)+15+c, 0, t+8, 20);
+    fill(0, 0, 255);
+    text(simDisplay[s], (width/2)+c+21, 2);
     c += t+5;
   }
 }//display
