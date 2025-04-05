@@ -59,7 +59,7 @@ void draw()
   } else if (g != null) {
     g.orbit();
   } else if (d != null) {
-    d.drag();    
+    d.drag();
   } else if (e != null) {
     e.electric();
   } else if (c != null) {
@@ -92,6 +92,8 @@ void keyPressed()
       s.addS();
     } else if (sim[GRAV]) {
       g.addS();
+    } else if (sim[DRAGS]) {
+      d.addS();
     } else if (sim[ELECTRIC]) {
       e.addS();
     } else if (sim[COMBO]) {
@@ -103,6 +105,8 @@ void keyPressed()
       s.removeS();
     } else if (sim[GRAV]) {
       g.removeS();
+    } else if (sim[DRAGS]) {
+      d.removeS();
     } else if (sim[ELECTRIC]) {
       e.removeS();
     } else if (sim[COMBO]) {

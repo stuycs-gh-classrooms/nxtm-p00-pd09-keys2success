@@ -51,4 +51,20 @@ class Drag {
       orbs[i] = new Orb(50+50*i, 100, random(10, MAX_SIZE), random(10, 100), 0);
     }
   }
+
+  void addS() {
+    Orb[] OrbCopy;
+    OrbCopy = new Orb[orbs.length+1];
+    arrayCopy(orbs, OrbCopy);
+    OrbCopy[OrbCopy.length-1] = new Orb (random(50, width-50), 100, random(10, MAX_SIZE), random(10, 100), 0);
+    orbs = OrbCopy;
+  }
+  void removeS() {
+    if (orbs.length > 0) {
+      Orb[] OrbCopy;
+      OrbCopy = new Orb[orbs.length-1];
+      arrayCopy(orbs, OrbCopy, orbs.length-1);
+      orbs = OrbCopy;
+    }
+  }
 }
